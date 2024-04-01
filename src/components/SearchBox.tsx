@@ -60,7 +60,7 @@ const SearchBox: React.FC<SearchBoxProps> = () => {
           placeholder="Search"
         />
         <div
-          className="overflow-y-auto max-h-[320px] absolute bg-white mt-2 w-full"
+          className="overflow-y-auto max-h-[320px] absolute bg-white mt-2 w-full shadow-md rounded-sm overflow-y-none"
           onClick={() => setIsFocused(false)}
         >
           {showSearchResults &&
