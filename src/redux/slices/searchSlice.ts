@@ -1,9 +1,9 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchSearchResults } from '../api';
-import { GitHubSearchState, Repository } from '../types';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { fetchSearchResults } from "../api";
+import { GitHubSearchState, Repository } from "../types";
 
 const initialState: GitHubSearchState = {
-  searchTerm: '',
+  searchTerm: "",
   searchResults: [],
   selectedRepository: null,
   isLoading: false,
@@ -11,12 +11,12 @@ const initialState: GitHubSearchState = {
 };
 
 export const fetchSearchResultsThunk = createAsyncThunk<Repository[], string>(
-  'search/fetchResults',
+  "search/fetchResults",
   async (searchTerm: string) => await fetchSearchResults(searchTerm)
 );
 
 const searchSlice = createSlice({
-  name: 'search',
+  name: "search",
   initialState,
   reducers: {
     setSearchTerm(state, action) {
@@ -24,6 +24,9 @@ const searchSlice = createSlice({
     },
     setSelectedRepository(state, action) {
       state.selectedRepository = action.payload;
+    },
+    setSearchResults(state, action) {
+      state.searchResults = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -38,10 +41,10 @@ const searchSlice = createSlice({
       })
       .addCase(fetchSearchResultsThunk.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.error.message || 'Failed to fetch data';
+        state.error = action.error.message || "Failed to fetch data";
       });
   },
 });
 
-export const { setSearchTerm, setSelectedRepository } = searchSlice.actions;
+export const { setSearchTerm, setSelectedRepository, setSearchResults } = searchSlice.actions;
 export default searchSlice.reducer;
