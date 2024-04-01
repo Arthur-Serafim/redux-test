@@ -7,7 +7,7 @@ import { GitHubSearchState } from "./redux/types";
 const App: React.FC = () => {
   const selectedRepository = useSelector(
     (state: { search: GitHubSearchState }) => state.search.selectedRepository
-  );
+  );  
 
   return (
     <div className="container mx-auto p-4">

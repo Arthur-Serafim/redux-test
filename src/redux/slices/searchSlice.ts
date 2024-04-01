@@ -4,6 +4,7 @@ import { GitHubSearchState, Repository } from "../types";
 
 const initialState: GitHubSearchState = {
   searchTerm: "",
+  history: [],
   searchResults: [],
   selectedRepository: null,
   isLoading: false,
@@ -23,6 +24,17 @@ const searchSlice = createSlice({
       state.searchTerm = action.payload;
     },
     setSelectedRepository(state, action) {
+      const existingIndex = state.history.findIndex(
+        (item) => item.id === action.payload.id
+      );
+
+      if (existingIndex !== -1) {
+        state.history = state.history.filter(
+          (item) => item.id !== action.payload.id
+        );
+      }
+
+      state.history = [action.payload, ...state.history].slice(0, 3);
       state.selectedRepository = action.payload;
     },
     setSearchResults(state, action) {
@@ -46,5 +58,6 @@ const searchSlice = createSlice({
   },
 });
 
-export const { setSearchTerm, setSelectedRepository, setSearchResults } = searchSlice.actions;
+export const { setSearchTerm, setSelectedRepository, setSearchResults } =
+  searchSlice.actions;
 export default searchSlice.reducer;

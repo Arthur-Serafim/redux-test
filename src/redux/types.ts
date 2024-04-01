@@ -1,6 +1,7 @@
 export interface GitHubSearchState {
   searchTerm: string;
   searchResults: Repository[];
+  history: Repository[];
   selectedRepository: Repository | null;
   isLoading: boolean;
   error: string | null;
