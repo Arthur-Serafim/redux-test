@@ -20,13 +20,13 @@ const ResultItem: FC<{ data: Repository; history?: boolean }> = ({
     dispatch(setSearchResults([]));
   };
   return (
-    <div
-      className="p-2 hover:bg-gray-100 rounded-md cursor-pointer flex align-center"
+    <button
+      className="p-2 hover:bg-gray-100 rounded-md cursor-pointer flex align-center w-full focus:outline-none focus:bg-gray-100"
       onClick={handleClick}
     >
       {history && <HistoryIcon className="mr-1" />}
       {data.name}
-    </div>
+    </button>
   );
 };
 
